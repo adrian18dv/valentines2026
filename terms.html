@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffeef2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background-color: white;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.15);
+            overflow: hidden;
+            border: 1px solid #ffe6f2;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #ff6699, #ff3385);
+            color: white;
+            padding: 35px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+        }
+        
+        .form-container {
+            padding: 40px 50px;
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+            border-radius: 20px;
+            padding: 0;
+            transition: all 0.5s ease;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.08);
+            border: 2px solid #ffe6f2;
+            background-color: #fff9fb;
+            overflow: hidden;
+            position: relative;
+            height: 90px;
+        }
+        
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #ff6699;
+            opacity: 0.3;
+        }
+        
+        .form-section.active {
+            border-color: #ff6699;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.15);
+            height: 100%;
+        }
+        
+        .form-section.active::before {
+            opacity: 1;
+            background-color: #ff3385;
+        }
+        
+        .form-section.completed {
+            background-color: #fff0f7;
+            border-color: #ff66a3;
+        }
+        
+        .form-section.completed::before {
+            background-color: #ff66a3;
+            opacity: 1;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            padding: 25px 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .form-section:not(.active) .section-header:hover {
+            background-color: rgba(255, 230, 242, 0.7);
+        }
+        
+        .section-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: #ffccdd;
+            color: #ff3385;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+            border: 2px solid #ffb3d9;
+            transition: all 0.3s;
+        }
+        
+        .form-section.active .section-number {
+            background-color: #ff3385;
+            color: white;
+            border-color: #ff3385;
+            box-shadow: 0 0 0 3px rgba(255, 51, 133, 0.2);
+        }
+        
+        .form-section.completed .section-number {
+            background-color: #ff66a3;
+            color: white;
+            border-color: #ff66a3;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: #ff3385;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .form-section.active .section-title {
+            color: #cc0066;
+        }
+        
+        .form-section.completed .section-title {
+            color: #ff66a3;
+        }
+        
+        .section-content {
+            padding: 0 30px 25px 100px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .form-section.active .section-content {
+            max-height: 300px;
+            padding-bottom: 25px;
+        }
+        
+        .section-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            padding: 12px 0;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-container:hover {
+            transform: translateX(5px);
+        }
+        
+        .checkbox-container input {
+            display: none;
+        }
+        
+        .checkmark {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #ff6699;
+            border-radius: 7px;
+            margin-right: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            background-color: white;
+        }
+        
+        .checkbox-container input:checked + .checkmark {
+            background-color: #ff3385;
+            border-color: #ff3385;
+        }
+        
+        .checkmark:after {
+            content: "";
+            width: 7px;
+            height: 14px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .checkbox-container input:checked + .checkmark:after {
+            opacity: 1;
+        }
+        
+        .checkbox-label {
+            font-size: 1.25rem;
+            color: #ff3385;
+            font-weight: 600;
+        }
+        
+        .checkbox-container:hover .checkmark {
+            background-color: rgba(255, 102, 153, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 102, 153, 0.1);
+        }
+        
+        .ready-button-container {
+            text-align: center;
+            margin-top: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .ready-button-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .ready-button {
+            background: linear-gradient(to right, #ff3385, #ff66a3);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(255, 51, 133, 0.3);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ready-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .ready-button:hover:before {
+            left: 100%;
+        }
+        
+        .ready-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255, 51, 133, 0.4);
+        }
+        
+        .ready-button:active {
+            transform: translateY(0);
+        }
+        
+        .progress-container {
+            margin: 30px 0 40px;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #ffe6f2;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #ff6699, #ff3385);
+            width: 25%;
+            transition: width 0.5s ease;
+            border-radius: 5px;
+        }
+        
+        .progress-hearts {
+            position: absolute;
+            top: -45px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 2;
+        }
+        
+        .progress-heart {
+            width: 30px;
+            height: 30px;
+            background-color: #ffccdd;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ff6699;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .progress-heart.active {
+            background-color: #ff3385;
+            color: white;
+            transform: scale(1.2);
+            box-shadow: 0 0 0 4px rgba(255, 51, 133, 0.2);
+        }
+        
+        .progress-heart.completed {
+            background-color: #ff66a3;
+            color: white;
+        }
+        
+        .status-message {
+            text-align: center;
+            margin-top: 15px;
+            color: #ff3385;
+            font-weight: 600;
+            font-size: 1.2rem;
+            height: 30px;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            color: #ff99c2;
+            font-size: 1rem;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                max-width: 95%;
+                border-radius: 20px;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+            
+            .section-content {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-header {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .ready-button {
+                padding: 18px 40px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-heart"></i> Valentine's Day</h1>
+            <p>Terms and Conditions <i class="fas fa-heart"></i></p>
+        </div>
+        
+        <div class="form-container">
+            <div class="progress-container">
+                <div class="progress-hearts">
+                    <div class="progress-heart active" id="heart1">1</div>
+                    <div class="progress-heart" id="heart2">2</div>
+                    <div class="progress-heart" id="heart3">3</div>
+                    <div class="progress-heart" id="heart4">4</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+            </div>
+            
+            <div class="status-message" id="status-message">Step 1: Today is THE exception...</div>
+            
+            <form id="multiStepForm">
+                <div class="form-section active" id="section1">
+                    <div class="section-header" id="header1">
+                        <div class="section-number">1</div>
+                        <div class="section-title">Today is THE exception...</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-text">
+                            I understand that today is an exception to the rule. 
+                            Accessing suspicious links and websites invites trouble, even when they have been sent by someone I know and trust.
+                        </div>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="check1" name="plan-date">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">I was 100% sure it was safe!</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-section" id="section2">
+                    <div class="section-header" id="header2">
+                        <div class="section-number">2</div>
+                        <div class="section-title">I missed the hint...</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-text">
+                            Yep... I missed the hint you gave me. I did not ask for more information about the link you sent or its purpose before accessing it...
+                        </div>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="check2" name="choose-gift">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">You got me this time, mahal <i class="fas fa-heart"></i>...</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-section" id="section3">
+                    <div class="section-header" id="header3">
+                        <div class="section-number">3</div>
+                        <div class="section-title">I know you care...</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-text">
+                            I'll continue to be careful with my accounts and personal information online.
+                            I promise you 🢆
+                        </div>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="check3" name="prepare-message">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">I'm really trying to not get scammed, my love <i class="fas fa-heart"></i></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-section" id="section4">
+                    <div class="section-header" id="header4">
+                        <div class="section-number">4</div>
+                        <div class="section-title"><i class="fas fa-heart"></i> You and me <i class="fas fa-heart"></i></div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-text">
+                            I know you love me. <i class="fas fa-heart"></i>
+                        </div>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="check4" name="final-touches">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label"><i class="fas fa-heart"></i> I love you too!</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="ready-button-container" id="readyButtonContainer">
+                    <button type="button" class="ready-button" id="readyButton">
+                        <i class="fas fa-heart"></i> Go! Go! Go!
+                    </button>
+                </div>
+                
+                <div class="footer-note">
+                    Made with <i class="fas fa-heart" style="color:#ff3385"></i> for Valentine's Day
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.form-section');
+            const headers = document.querySelectorAll('.section-header');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const readyButtonContainer = document.getElementById('readyButtonContainer');
+            const readyButton = document.getElementById('readyButton');
+            const progress = document.getElementById('progress');
+            const statusMessage = document.getElementById('status-message');
+            const hearts = document.querySelectorAll('.progress-heart');
+            
+            // Section titles for status message
+            const sectionTitles = [
+                "Today is THE exception...",
+                "I missed the hint...",
+                "I know you care...",
+                "You and Me"
+            ];
+            
+            // Make all headers clickable to expand/collapse sections
+            headers.forEach((header, index) => {
+                header.addEventListener('click', function() {
+                    // Only allow expanding if previous sections are completed
+                    if (index === 0 || checkboxes[index-1].checked) {
+                        // Toggle active state
+                        const isActive = sections[index].classList.contains('active');
+                        
+                        // If not active and previous checkbox is checked, activate it
+                        if (!isActive && (index === 0 || checkboxes[index-1].checked)) {
+                            sections[index].classList.add('active');
+                        }
+                    }
+                });
+            });
+            
+            // Update progress bar, hearts, and status message
+            function updateProgress() {
+                const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+                const progressPercentage = (checkedCount / checkboxes.length) * 100;
+                progress.style.width = `${progressPercentage}%`;
+                
+                // Update hearts
+                hearts.forEach((heart, index) => {
+                    heart.classList.remove('active', 'completed');
+                    
+                    if (index === checkedCount && checkedCount < checkboxes.length) {
+                        heart.classList.add('active');
+                    } else if (index < checkedCount) {
+                        heart.classList.add('completed');
+                    }
+                });
+                
+                // Update status message
+                if (checkedCount === 0) {
+                    statusMessage.textContent = `Step 1: ${sectionTitles[0]}`;
+                } else if (checkedCount < checkboxes.length) {
+                    statusMessage.textContent = `Step ${checkedCount + 1}: ${sectionTitles[checkedCount]}`;
+                } else {
+                    statusMessage.textContent = 'All steps completed! Ready for Valentine\'s Day!';
+                }
+            }
+            
+            // Handle checkbox click events
+            checkboxes.forEach((checkbox, index) => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Mark the current section as completed
+                        sections[index].classList.add('completed');
+                        
+                        // Show the next section if there is one
+                        if (index < sections.length - 1) {
+                            const nextSection = sections[index + 1];
+                            nextSection.classList.add('active');
+                        }
+                        
+                        // If all checkboxes are checked, show the ready button
+                        if (document.querySelectorAll('input[type="checkbox"]:checked').length === checkboxes.length) {
+                            readyButtonContainer.classList.add('show');
+                        }
+                    } else {
+                        // If unchecked, remove completed status
+                        sections[index].classList.remove('completed');
+                        
+                        // Hide the ready button if not all checkboxes are checked
+                        readyButtonContainer.classList.remove('show');
+                        
+                        // Hide all subsequent sections and uncheck their checkboxes
+                        for (let i = index + 1; i < sections.length; i++) {
+                            sections[i].classList.remove('active', 'completed');
+                            checkboxes[i].checked = false;
+                        }
+                    }
+                    
+                    updateProgress();
+                });
+            });
+            
+            // Handle the ready button click
+            readyButton.addEventListener('click', function() {
+                // Check if all checkboxes are checked
+                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                
+                if (allChecked) {
+                    // Create a celebration effect
+                    readyButton.innerHTML = '<i class="fas fa-heart"></i> Love ya\'😘';
+                    readyButton.style.background = 'linear-gradient(to right, #ff66a3, #ff3385)';
+                    
+                    // Show success message with Valentine's theme
+                    const messages = [
+                        "You're all set for a perfect Valentine's Day! 💝",
+                        "Your Valentine will be so impressed with your preparation! 🌹",
+                        "Wishing you a wonderful Valentine's Day filled with love! 💖",
+                        "All your preparations are complete! Enjoy your special day! 💕"
+                    ];
+                    
+                    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                    
+                    // Create a custom alert style
+                    const alertDiv = document.createElement('div');
+                    alertDiv.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: white;
+                        padding: 30px;
+                        border-radius: 20px;
+                        box-shadow: 0 15px 35px rgba(255, 51, 133, 0.3);
+                        z-index: 1000;
+                        text-align: center;
+                        border: 3px solid #ffccdd;
+                        max-width: 400px;
+                        width: 90%;
+                    `;
+                    
+                    alertDiv.innerHTML = `
+                        <div style="font-size: 3rem; color: #ff3385; margin-bottom: 15px;">💖</div>
+                        <h3 style="color: #ff3385; margin-bottom: 15px;">Valentine's Day</h3>
+                        <p style="color: #666; margin-bottom: 25px; font-size: 1.1rem;">All systems are online and ready for my queen.</p>
+                        <button id="closeAlert" style="border: none; background-color: rgba(0,0,0,0);">
+                            <a href="main.html" style="color: white; text-decoration: none; background: #ff3385; color: white; border: none; padding: 10px 25px; border-radius: 50px; cursor: pointer; font-weight: 600;">Surprise me!</a>
+                        </button>
+                    `;
+                    
+                    const overlay = document.createElement('div');
+                    overlay.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: rgba(255, 204, 221, 0.8);
+                        z-index: 999;
+                    `;
+                    
+                    document.body.appendChild(overlay);
+                    document.body.appendChild(alertDiv);
+                    
+                    document.getElementById('closeAlert').addEventListener('click', function() {
+                        document.body.removeChild(overlay);
+                        document.body.removeChild(alertDiv);
+                    });
+                } else {
+                    alert('Please complete all steps before proceeding. Your Valentine deserves the best! 💝');
+                }
+            });
+            
+            // Initialize progress
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

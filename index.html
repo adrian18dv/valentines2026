@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chihuahua Image Scroll</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #FADADD;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .row {
+            display: flex;
+            margin-bottom: 20px;
+            height: 408px;
+            width: max-content;
+        }
+
+        .image-wrapper {
+            width: 408px;
+            height: 408px;
+            margin: 0 10px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Animation classes for different rows */
+        .row-1 {
+            animation: scroll-left 120s linear infinite;
+        }
+
+        .row-2 {
+            animation: scroll-left 100s linear infinite;
+        }
+
+        .row-3 {
+            animation: scroll-left 140s linear infinite;
+        }
+
+        .row-4 {
+            animation: scroll-left 110s linear infinite;
+        }
+
+        .row-5 {
+            animation: scroll-left 130s linear infinite;
+        }
+
+        .row-6 {
+            animation: scroll-left 90s linear infinite;
+        }
+
+        /* Overlay with reduced opacity */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .warning-text {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            line-height: 1.3;
+        }
+
+        .question-text {
+            font-size: 2.2rem;
+            color: #555;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Button styles */
+        .apology-button {
+            background-color: #888;
+            color: white;
+            border: none;
+            padding: 25px 60px;
+            font-size: 2.2rem;
+            border-radius: 12px;
+            cursor: not-allowed;
+            box-shadow: 0 6px 0 #666, 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            letter-spacing: 1px;
+            min-width: 350px;
+        }
+
+        .apology-button.active {
+            background-color: #ff4444;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #cc0000, 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .apology-button.active:hover {
+            background-color: #ff6666;
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #cc0000, 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .apology-button.active:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #cc0000, 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animation for scrolling rows */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Valentine's overlay styles */
+        #valentine-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FADADD;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            overflow: hidden;
+        }
+        
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            background-color: #ff9eb5;
+            opacity: 0.6;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ff9eb5;
+            border-radius: 50%;
+        }
+        
+        .heart:before {
+            top: -50%;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: 50%;
+        }
+        
+        .heart.small {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .heart.medium {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .heart.large {
+            width: 50px;
+            height: 50px;
+        }
+        
+        /* Text and button styles */
+        .valentine-content {
+            text-align: center;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 50px 70px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .valentine-content:before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #f8eaed, #ffffff, #f8eaed);
+            z-index: -1;
+            border-radius: 30px;
+        }
+        
+        .valentine-title {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 5rem;
+            color: #d32f2f;
+            margin: 0 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .valentine-subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .ready-btn {
+            background: linear-gradient(to right, #ff6b93, #ff9eb5);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(255, 107, 147, 0.4);
+        }
+        
+        .ready-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 107, 147, 0.5);
+        }
+        
+        .ready-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="imageContainer">
+        <!-- Rows will be generated by JavaScript -->
+    </div>
+
+    <div class="overlay">
+        <div class="question-text">You got... HACKED...</div>
+        <div class="warning-text">Have I NOT warned you enough about random links?</div>
+        <div class="question-text">Why are you here???</div>
+        <button class="apology-button" id="apologyButton">BAD Girl Pause (9)</button>
+    </div>
+
+    <!-- Valentine's Day Overlay -->
+    <div id="valentine-overlay">
+        <div class="hearts-container" id="hearts-container">
+            <!-- Hearts will be generated with JavaScript -->
+        </div>
+        
+        <div class="valentine-content">
+            <h1 class="valentine-title">Valentine's Day</h1>
+            <p class="valentine-subtitle">Made with love, just for you.</p>
+            <button class="ready-btn" id="ready-btn">I'm ready!</button>
+        </div>
+    </div>
+
+    <!-- Audio element for background music -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music_chiwawa.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('valentine-overlay');
+            const readyBtn = document.getElementById('ready-btn');
+            const heartsContainer = document.getElementById('hearts-container');
+            const container = document.getElementById('imageContainer');
+            const apologyButton = document.getElementById('apologyButton');
+            const bgMusic = document.getElementById('bgMusic');
+            const imageCount = 4;
+            const rowHeight = 408;
+            const margin = 20;
+            const imageWidth = 408;
+            const imageMargin = 10;
+            
+            // Button countdown variables
+            let countdown = 9;
+            let countdownInterval;
+            let textAnimationInterval;
+            let dotsCount = 0;
+            let isButtonActive = false;
+            let userInteracted = false;
+            
+            // Function to start music
+            function startBackgroundMusic() {
+                if (!userInteracted) {
+                    userInteracted = true;
+                    bgMusic.volume = 0.5;
+                    bgMusic.play().catch(e => {
+                        console.log("Autoplay prevented:", e);
+                    });
+                }
+            }
+            
+            // Try to autoplay on load
+            // bgMusic.play().catch(e => {
+            //     console.log("Autoplay prevented, will play on user interaction");
+            // });
+            
+            // Set up interaction listeners
+            // document.addEventListener('click', startBackgroundMusic);
+            // document.addEventListener('touchstart', startBackgroundMusic);
+            // document.addEventListener('keydown', startBackgroundMusic);
+            
+            // Function to generate random sequence without consecutive duplicates
+            function generateRandomSequence(length) {
+                const sequence = [];
+                let lastImage = 0;
+                
+                for (let i = 0; i < length; i++) {
+                    let possibleNumbers = [1, 2, 3, 4];
+                    
+                    // Remove the last used image to avoid consecutive duplicates
+                    if (lastImage !== 0) {
+                        possibleNumbers = possibleNumbers.filter(num => num !== lastImage);
+                    }
+                    
+                    // Randomly select from remaining options
+                    const randomIndex = Math.floor(Math.random() * possibleNumbers.length);
+                    const selectedImage = possibleNumbers[randomIndex];
+                    
+                    sequence.push(selectedImage);
+                    lastImage = selectedImage;
+                }
+                
+                return sequence;
+            }
+            
+            // Start the countdown for the button
+            // startCountdown();
+            
+            // Calculate how many rows we need to fill the screen
+            const screenHeight = window.innerHeight;
+            const rowsNeeded = Math.ceil(screenHeight / (rowHeight + margin)) + 2;
+            
+            // Create rows
+            for (let rowIndex = 0; rowIndex < rowsNeeded; rowIndex++) {
+                const row = document.createElement('div');
+                row.className = `row row-${(rowIndex % 6) + 1}`;
+                
+                // Generate random sequence for this row
+                const screenWidth = window.innerWidth;
+                const imagesPerScreen = Math.ceil(screenWidth / (imageWidth + imageMargin * 2));
+                const imagesPerRow = imagesPerScreen * 2;
+                const imageSequence = generateRandomSequence(imagesPerRow);
+                
+                for (let i = 0; i < imagesPerRow; i++) {
+                    const imageNumber = imageSequence[i];
+                    
+                    const imageWrapper = document.createElement('div');
+                    imageWrapper.className = 'image-wrapper';
+                    
+                    const img = document.createElement('img');
+                    img.src = `chiwawa/chiwawa_${imageNumber}.png`;
+                    img.alt = `Chihuahua ${imageNumber}`;
+                    
+                    img.onerror = function() {
+                        this.style.backgroundColor = '#e0e0e0';
+                        this.style.display = 'flex';
+                        this.style.justifyContent = 'center';
+                        this.style.alignItems = 'center';
+                        this.style.color = '#888';
+                        this.style.fontSize = '20px';
+                        this.style.fontWeight = 'bold';
+                        
+                        const parent = this.parentElement;
+                        const textDiv = document.createElement('div');
+                        textDiv.textContent = `Chihuahua ${imageNumber}`;
+                        parent.appendChild(textDiv);
+                        this.style.display = 'none';
+                    };
+                    
+                    imageWrapper.appendChild(img);
+                    row.appendChild(imageWrapper);
+                }
+                
+                container.appendChild(row);
+            }
+            
+            // Function to start the button countdown
+            function startCountdown() {
+                countdownInterval = setInterval(function() {
+                    countdown--;
+                    apologyButton.textContent = `BAD Girl Pause (${countdown})`;
+                    
+                    if (countdown <= 0) {
+                        clearInterval(countdownInterval);
+                        activateButton();
+                    }
+                }, 1000);
+            }
+            
+            // Function to activate the button
+            function activateButton() {
+                isButtonActive = true;
+                apologyButton.textContent = "I'm sorry";
+                apologyButton.classList.add('active');
+                
+                // Start the text animation after button is active
+                startTextAnimation();
+                
+                // Add click handler for the button - redirect to terms.html
+                apologyButton.addEventListener('click', function() {
+                    window.location.href = 'terms.html';
+                });
+                
+                // Try to start music when button becomes active
+                startBackgroundMusic();
+            }
+            
+            // Function to animate the text after button is active
+            function startTextAnimation() {
+                textAnimationInterval = setInterval(function() {
+                    dotsCount = (dotsCount + 1) % 4;
+                    
+                    let dots = '';
+                    for (let i = 0; i < dotsCount; i++) {
+                        dots += '.';
+                    }
+                    
+                    apologyButton.textContent = `I'm sorry${dots}`;
+                }, 1000);
+            }
+            
+            // Handle window resize to adjust rows
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    // Remove all rows
+                    while (container.firstChild) {
+                        container.removeChild(container.firstChild);
+                    }
+                    
+                    // Recreate rows with new dimensions
+                    const newScreenHeight = window.innerHeight;
+                    const newRowsNeeded = Math.ceil(newScreenHeight / (rowHeight + margin)) + 2;
+                    
+                    for (let rowIndex = 0; rowIndex < newRowsNeeded; rowIndex++) {
+                        const row = document.createElement('div');
+                        row.className = `row row-${(rowIndex % 6) + 1}`;
+                        
+                        const newScreenWidth = window.innerWidth;
+                        const newImagesPerScreen = Math.ceil(newScreenWidth / (imageWidth + imageMargin * 2));
+                        const newImagesPerRow = newImagesPerScreen * 2;
+                        const newImageSequence = generateRandomSequence(newImagesPerRow);
+                        
+                        for (let i = 0; i < newImagesPerRow; i++) {
+                            const imageNumber = newImageSequence[i];
+                            
+                            const imageWrapper = document.createElement('div');
+                            imageWrapper.className = 'image-wrapper';
+                            
+                            const img = document.createElement('img');
+                            img.src = `chiwawa/chiwawa_${imageNumber}.png`;
+                            img.alt = `Chihuahua ${imageNumber}`;
+                            
+                            imageWrapper.appendChild(img);
+                            row.appendChild(imageWrapper);
+                        }
+                        
+                        container.appendChild(row);
+                    }
+                }, 250);
+            });
+
+            // Generate hearts
+            function createHearts() {
+                const heartSizes = ['small', 'medium', 'large'];
+                const heartCount = 30;
+                
+                for (let i = 0; i < heartCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    
+                    // Random size
+                    const size = heartSizes[Math.floor(Math.random() * heartSizes.length)];
+                    heart.classList.add(size);
+                    
+                    // Random position
+                    const left = Math.random() * 100;
+                    const top = Math.random() * 100;
+                    
+                    // Random animation delay
+                    const delay = Math.random() * 5;
+                    
+                    // Set heart properties
+                    heart.style.left = `${left}%`;
+                    heart.style.top = `${top}%`;
+                    heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    heart.style.animationDelay = `${delay}s`;
+                    heart.style.opacity = `${0.3 + Math.random() * 0.5}`;
+                    
+                    heartsContainer.appendChild(heart);
+                }
+            }
+
+            // Initialize hearts
+            createHearts();
+            
+            // Add CSS animation for hearts
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-20px) rotate(10deg); }
+                }
+                
+                .heart {
+                    animation: float 3s infinite ease-in-out;
+                }
+                
+                .heart.small {
+                    animation-duration: 4s;
+                }
+                
+                .heart.medium {
+                    animation-duration: 3.5s;
+                }
+                
+                .heart.large {
+                    animation-duration: 3s;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Ready button event
+            readyBtn.addEventListener('click', function() {
+                // Hide overlay with fade out effect
+                overlay.style.opacity = '0';
+                overlay.style.visibility = 'hidden';
+                
+                // Start countdown
+                startCountdown();
+
+                // Start background music 
+                startBackgroundMusic();
+            });
+        });
+    </script>
+</body>
+</html>
