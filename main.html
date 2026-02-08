@@ -573,7 +573,19 @@
                 display: none;
             }
         }
-
+        
+        @media (max-aspect-ratio: 4/6) {
+            .gif-container {
+                height: 20vh;
+            }
+            .button-section {
+                gap: 20px;
+            }
+            .gif-label::after {
+                right: -20px;
+            }
+        }
+        
         .tenor-gif-embed {
             display: none;
         }
